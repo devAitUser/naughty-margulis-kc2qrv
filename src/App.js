@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import LoginPage from "/src/pages/LoginPage";
-import HomePage from "/src/pages/HomePage";
-import AuthService from "./services/AuthService";
+import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

@@ -1,0 +1,57 @@
+.ent-auth-container {
+  font-family: "Segoe UI", Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.ent-header {
+  background: #0056b3; /* Bleu universitaire */
+  color: white;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.university-logo {
+  height: 80px;
+  width: auto;
+}
+
+.university-titles {
+  text-align: right;
+  flex-grow: 1;
+}
+
+.arabic-names {
+  direction: rtl;
+  font-size: 1.3rem;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.auth-top-buttons {
+  display: flex;
+  background: #f0f0f0;
+}
+
+.auth-btn {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.auth-btn.active {
+  background: white;
+  color: #0056b3;
+  border-top: 3px solid #0056b3;
+}
+
+.ent-auth-content {
+  padding: 30px;
+  background: white;
+}

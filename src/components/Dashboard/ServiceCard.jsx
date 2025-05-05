@@ -8,3 +8,5 @@ const ServiceCard = ({ title, items }) => (
     </ul>
   </div>
 );
+
+export default ServiceCard;

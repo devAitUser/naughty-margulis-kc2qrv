@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import '/src/css/LoginForm.css'; // Fichier de styles (à créer)
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "../../css/LoginForm.css"; // Fichier de styles (à créer)
 
 const LoginForm = ({ onLoginSuccess }) => {
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-    isNewUser: false
+    username: "",
+    password: "",
+    isNewUser: false,
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     // Validation simple
     if (!formData.username || !formData.password) {
-      setError('Veuillez remplir tous les champs');
+      setError("Veuillez remplir tous les champs");
       setLoading(false);
       return;
     }
@@ -36,46 +36,46 @@ const LoginForm = ({ onLoginSuccess }) => {
     try {
       // Configuration pour Keycloak
       const authData = new URLSearchParams();
-      authData.append('client_id', 'fastapi-client');
-      authData.append('grant_type', 'password');
-      authData.append('username', formData.username);
-      authData.append('password', formData.password);
-      authData.append('scope', 'openid profile email');
+      authData.append("client_id", "fastapi-client");
+      authData.append("grant_type", "password");
+      authData.append("username", formData.username);
+      authData.append("password", formData.password);
+      authData.append("scope", "openid profile email");
 
       // Option pour développement seulement (supprimer en production)
       axios.defaults.withCredentials = true;
 
       const response = await axios.post(
-        'http://34.71.65.193:8080/realms/appest/protocol/openid-connect/token',
+        "http://34.71.65.193:8080/realms/appest/protocol/openid-connect/token",
         authData,
         {
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
         }
       );
 
       // Stockage des tokens
-      localStorage.setItem('keycloakToken', response.data.access_token);
-      localStorage.setItem('refreshToken', response.data.refresh_token);
-      
+      localStorage.setItem("keycloakToken", response.data.access_token);
+      localStorage.setItem("refreshToken", response.data.refresh_token);
+
       // Notification du succès
       onLoginSuccess();
-      
+
       // Redirection vers le dashboard
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (err) {
-      console.error('Erreur de connexion:', err);
-      
-      let errorMessage = 'Échec de la connexion';
+      console.error("Erreur de connexion:", err);
+
+      let errorMessage = "Échec de la connexion";
       if (err.response) {
         if (err.response.status === 401) {
-          errorMessage = 'Identifiant ou mot de passe incorrect';
+          errorMessage = "Identifiant ou mot de passe incorrect";
         } else if (err.response.data?.error_description) {
           errorMessage = err.response.data.error_description;
         }
       }
-      
+
       setError(errorMessage);
     } finally {
       setLoading(false);
@@ -84,14 +84,15 @@ const LoginForm = ({ onLoginSuccess }) => {
 
   const handleForgotPassword = () => {
     // Redirection vers la page de réinitialisation
-    window.location.href = 'http://34.71.65.193:8080/realms/appest/login-actions/reset-credentials?client_id=fastapi-client';
+    window.location.href =
+      "http://34.71.65.193:8080/realms/appest/login-actions/reset-credentials?client_id=fastapi-client";
   };
 
   return (
     <div className="auth-form-container">
       <div className="auth-form">
         <h2>AUTHENTIFICATION</h2>
-        
+
         {error && (
           <div className="error-message">
             <i className="fa fa-exclamation-circle"></i> {error}
@@ -139,25 +140,17 @@ const LoginForm = ({ onLoginSuccess }) => {
 
           <div className="form-footer">
             <label className="checkbox-label">
-              <input 
-                type="checkbox" 
-                onClick={handleForgotPassword}
-                readOnly
-              />
+              <input type="checkbox" onClick={handleForgotPassword} readOnly />
               <span onClick={handleForgotPassword}>Mot de passe oublié ?</span>
             </label>
-            
-            <button 
-              type="submit" 
-              className="login-btn"
-              disabled={loading}
-            >
+
+            <button type="submit" className="login-btn" disabled={loading}>
               {loading ? (
                 <>
                   <i className="fa fa-spinner fa-spin"></i> Connexion...
                 </>
               ) : (
-                'SE CONNECTER'
+                "SE CONNECTER"
               )}
             </button>
           </div>

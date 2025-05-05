@@ -1,5 +1,5 @@
 // src/pages/HomePage.jsx
-import { MainMenu } from "/src/components/Dashboard/MainMenu";
+import { MainMenu } from "../components/Dashboard/MainMenu";
 
 const HomePage = ({ keycloak, onLogout }) => {
   const userEmail = keycloak?.tokenParsed?.email || "Utilisateur";
@@ -15,3 +15,5 @@ const HomePage = ({ keycloak, onLogout }) => {
     </div>
   );
 };
+
+export default HomePage;

@@ -8,9 +8,6 @@ const keycloak = new Keycloak({
   scope: "openid profile email",
   pkce: true,
   code_challenge_method: "S256",
-  client_secret: "C2fyP5FmrWHLEzvWoBQ892rvnvj8lD1G",  // EXPOSÉ DANS LE CODE !
-
-
 });
 
 // Solution dynamique pour développement
