@@ -1,0 +1,70 @@
+/* Conteneur principal */
+.ent-auth-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* En-tête avec logo */
+.ent-header {
+  background-color: #2c3e50;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 4px solid #e74c3c;
+  position: relative;
+}
+
+.university-logo {
+  max-height: 80px;
+  max-width: 100%;
+}
+
+/* Boutons de navigation */
+.auth-top-buttons {
+  display: flex;
+  border-bottom: 1px solid #eee;
+}
+
+.auth-btn {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: #7f8c8d;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.auth-btn.active {
+  color: #2c3e50;
+  border-bottom: 3px solid #e74c3c;
+  background-color: #f9f9f9;
+}
+
+.auth-btn::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+.auth-btn:first-child::before {
+  content: "\f023"; /* Icône d'authentification */
+}
+
+.auth-btn:last-child::before {
+  content: "\f059"; /* Icône d'aide */
+}
+
+/* Contenu enfant */
+.ent-auth-content {
+  padding: 25px;
+}
